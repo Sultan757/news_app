@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "125721940800",
+    "project_id": "volt-app-f8b52",
+    "storage_bucket": "volt-app-f8b52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125721940800:android:c2375705594b7223b5a0a5",
+        "android_client_info": {
+          "package_name": "com.example.showcase_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6LP0OF6VBych368d4ljPuJo7Qi364baE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
