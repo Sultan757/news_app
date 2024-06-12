@@ -17,7 +17,7 @@ class SplashView extends StatelessWidget {
     return ViewModelBuilder<SplashViewModel>.reactive(
       viewModelBuilder: () => SplashViewModel(),
       builder: (context, viewModel, child) {
-        Future.delayed(Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 2), () {
           NavService.navigateTo(Routes.loginView);
         });
         return Scaffold(

@@ -1,5 +1,5 @@
 class AppStrings {
-  static const String baseUrl = 'https://api-uat.kistpay.com';
+  static const String baseUrl = 'https://thunthunthunbackend.onrender.com/';
 
   //Login Screen
   static const String login = 'Login';

@@ -5,39 +5,34 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i7;
 import 'package:flutter/material.dart';
-import 'package:showcase_app/ui/views/forgot_password/forgot_password_view.dart'
-    as _i5;
-import 'package:showcase_app/ui/views/home/home_view.dart' as _i7;
+import 'package:showcase_app/ui/views/home/home_view.dart' as _i5;
 import 'package:showcase_app/ui/views/login/login_view.dart' as _i3;
-import 'package:showcase_app/ui/views/reset_password/reset_password_view.dart'
+import 'package:showcase_app/ui/views/news_details/news_details_view.dart'
     as _i6;
 import 'package:showcase_app/ui/views/signup/signup_view.dart' as _i4;
 import 'package:showcase_app/ui/views/splash/splash_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i9;
+import 'package:stacked_services/stacked_services.dart' as _i8;
 
 class Routes {
   static const splashView = '/';
 
   static const loginView = '/login-view';
 
-  static const signUpView = '/sign-up-view';
-
-  static const forgotPasswordView = '/forgot-password-view';
-
-  static const resetPasswordView = '/reset-password-view';
+  static const registerView = '/register-view';
 
   static const homeView = '/home-view';
+
+  static const newsDetailsView = '/news-details-view';
 
   static const all = <String>{
     splashView,
     loginView,
-    signUpView,
-    forgotPasswordView,
-    resetPasswordView,
+    registerView,
     homeView,
+    newsDetailsView,
   };
 }
 
@@ -52,57 +47,50 @@ class StackedRouter extends _i1.RouterBase {
       page: _i3.LoginView,
     ),
     _i1.RouteDef(
-      Routes.signUpView,
-      page: _i4.SignUpView,
-    ),
-    _i1.RouteDef(
-      Routes.forgotPasswordView,
-      page: _i5.ForgotPasswordView,
-    ),
-    _i1.RouteDef(
-      Routes.resetPasswordView,
-      page: _i6.ResetPasswordView,
+      Routes.registerView,
+      page: _i4.RegisterView,
     ),
     _i1.RouteDef(
       Routes.homeView,
-      page: _i7.HomeView,
+      page: _i5.HomeView,
+    ),
+    _i1.RouteDef(
+      Routes.newsDetailsView,
+      page: _i6.NewsDetailsView,
     ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i7.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.LoginView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i7.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.LoginView(),
         settings: data,
       );
     },
-    _i4.SignUpView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i4.SignUpView(),
+    _i4.RegisterView: (data) {
+      return _i7.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i4.RegisterView(),
         settings: data,
       );
     },
-    _i5.ForgotPasswordView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i5.ForgotPasswordView(),
+    _i5.HomeView: (data) {
+      return _i7.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i5.HomeView(),
         settings: data,
       );
     },
-    _i6.ResetPasswordView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i6.ResetPasswordView(),
-        settings: data,
+    _i6.NewsDetailsView: (data) {
+      final args = data.getArgs<NewsDetailsViewArguments>(
+        orElse: () => const NewsDetailsViewArguments(),
       );
-    },
-    _i7.HomeView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i7.HomeView(),
+      return _i7.MaterialPageRoute<dynamic>(
+        builder: (context) => _i6.NewsDetailsView(key: args.key),
         settings: data,
       );
     },
@@ -115,7 +103,29 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i9.NavigationService {
+class NewsDetailsViewArguments {
+  const NewsDetailsViewArguments({this.key});
+
+  final _i7.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant NewsDetailsViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i8.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -144,42 +154,14 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSignUpView([
+  Future<dynamic> navigateToRegisterView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.signUpView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> navigateToForgotPasswordView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.forgotPasswordView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> navigateToResetPasswordView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.resetPasswordView,
+    return navigateTo<dynamic>(Routes.registerView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -194,6 +176,22 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.homeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNewsDetailsView({
+    _i7.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.newsDetailsView,
+        arguments: NewsDetailsViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -228,42 +226,14 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSignUpView([
+  Future<dynamic> replaceWithRegisterView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.signUpView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> replaceWithForgotPasswordView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.forgotPasswordView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> replaceWithResetPasswordView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.resetPasswordView,
+    return replaceWith<dynamic>(Routes.registerView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -278,6 +248,22 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.homeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithNewsDetailsView({
+    _i7.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.newsDetailsView,
+        arguments: NewsDetailsViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
