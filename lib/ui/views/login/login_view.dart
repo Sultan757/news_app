@@ -23,8 +23,8 @@ class LoginView extends StatelessWidget {
           backgroundColor: AppColors.white,
 
           appBar: AppBar(
-            backgroundColor: AppColors.frenchSkyBlue,
-            iconTheme: const IconThemeData(color: AppColors.white),
+            backgroundColor: AppColors.black,
+           // iconTheme: const IconThemeData(color: AppColors.white),
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0.flexibleWidth),
@@ -64,6 +64,7 @@ class LoginView extends StatelessWidget {
                       ),
                       SizedBox(height: 10.flexibleHeight),
                       appTextField(
+                        obscureText: true,
                         controller: viewModel.passwordController,
                         hintText: 'Enter your password',
                         prefixIcon: const Icon(
@@ -72,7 +73,7 @@ class LoginView extends StatelessWidget {
                         ),
                       ),
                       const Spacer(flex: 2),
-                      viewModel.isLoading ? const CircularProgressIndicator(color: AppColors.frenchSkyBlue):
+                      viewModel.isLoading ? const CircularProgressIndicator(color: AppColors.black):
                       appButton(
                         onPressed: () {
                           // if (viewModel.formKey.currentState!.validate()) {
@@ -83,7 +84,7 @@ class LoginView extends StatelessWidget {
                           //}
                         },
                         btnText:  'Login',
-                        bgColor: AppColors.frenchSkyBlue,
+                        bgColor: AppColors.black,
                         txtColor: AppColors.white,
                       ),
                       SizedBox(height: 10.flexibleHeight),

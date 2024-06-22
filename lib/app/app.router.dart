@@ -7,6 +7,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart' as _i7;
 import 'package:flutter/material.dart';
+import 'package:showcase_app/models/response/get_news_response.dart' as _i8;
 import 'package:showcase_app/ui/views/home/home_view.dart' as _i5;
 import 'package:showcase_app/ui/views/login/login_view.dart' as _i3;
 import 'package:showcase_app/ui/views/news_details/news_details_view.dart'
@@ -14,7 +15,7 @@ import 'package:showcase_app/ui/views/news_details/news_details_view.dart'
 import 'package:showcase_app/ui/views/signup/signup_view.dart' as _i4;
 import 'package:showcase_app/ui/views/splash/splash_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i8;
+import 'package:stacked_services/stacked_services.dart' as _i9;
 
 class Routes {
   static const splashView = '/';
@@ -90,7 +91,11 @@ class StackedRouter extends _i1.RouterBase {
         orElse: () => const NewsDetailsViewArguments(),
       );
       return _i7.MaterialPageRoute<dynamic>(
-        builder: (context) => _i6.NewsDetailsView(key: args.key),
+        builder: (context) => _i6.NewsDetailsView(
+            key: args.key,
+            newsDetails: args.newsDetails,
+            videoUrl: args.videoUrl,
+            blogId: args.blogId),
         settings: data,
       );
     },
@@ -104,28 +109,45 @@ class StackedRouter extends _i1.RouterBase {
 }
 
 class NewsDetailsViewArguments {
-  const NewsDetailsViewArguments({this.key});
+  const NewsDetailsViewArguments({
+    this.key,
+    this.newsDetails,
+    this.videoUrl,
+    this.blogId,
+  });
 
   final _i7.Key? key;
 
+  final _i8.Data? newsDetails;
+
+  final List<String>? videoUrl;
+
+  final String? blogId;
+
   @override
   String toString() {
-    return '{"key": "$key"}';
+    return '{"key": "$key", "newsDetails": "$newsDetails", "videoUrl": "$videoUrl", "blogId": "$blogId"}';
   }
 
   @override
   bool operator ==(covariant NewsDetailsViewArguments other) {
     if (identical(this, other)) return true;
-    return other.key == key;
+    return other.key == key &&
+        other.newsDetails == newsDetails &&
+        other.videoUrl == videoUrl &&
+        other.blogId == blogId;
   }
 
   @override
   int get hashCode {
-    return key.hashCode;
+    return key.hashCode ^
+        newsDetails.hashCode ^
+        videoUrl.hashCode ^
+        blogId.hashCode;
   }
 }
 
-extension NavigatorStateExtension on _i8.NavigationService {
+extension NavigatorStateExtension on _i9.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -184,6 +206,9 @@ extension NavigatorStateExtension on _i8.NavigationService {
 
   Future<dynamic> navigateToNewsDetailsView({
     _i7.Key? key,
+    _i8.Data? newsDetails,
+    List<String>? videoUrl,
+    String? blogId,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -191,7 +216,11 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.newsDetailsView,
-        arguments: NewsDetailsViewArguments(key: key),
+        arguments: NewsDetailsViewArguments(
+            key: key,
+            newsDetails: newsDetails,
+            videoUrl: videoUrl,
+            blogId: blogId),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -256,6 +285,9 @@ extension NavigatorStateExtension on _i8.NavigationService {
 
   Future<dynamic> replaceWithNewsDetailsView({
     _i7.Key? key,
+    _i8.Data? newsDetails,
+    List<String>? videoUrl,
+    String? blogId,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -263,7 +295,11 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition,
   }) async {
     return replaceWith<dynamic>(Routes.newsDetailsView,
-        arguments: NewsDetailsViewArguments(key: key),
+        arguments: NewsDetailsViewArguments(
+            key: key,
+            newsDetails: newsDetails,
+            videoUrl: videoUrl,
+            blogId: blogId),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

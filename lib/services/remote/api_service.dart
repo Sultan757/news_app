@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:showcase_app/models/response/get_comments.dart';
 import 'package:showcase_app/models/response/get_news_response.dart';
 import 'package:showcase_app/models/response/login_response.dart';
 import 'package:showcase_app/models/response/register_response.dart';
+import '../../models/response/post_comment_response.dart';
 import 'api_client.dart';
 
 class ApiService {
@@ -57,5 +56,29 @@ class ApiService {
     return GetNewsResponse.fromJson(response.data);
   }
 
+  Future<GetCommentsResponse> getComments(String id) async {
+    final response = await _apiClient.getReq(
+      '/comments/$id',
+    );
+    return GetCommentsResponse.fromJson(response.data);
+  }
 
+  Future<postCommentResponse> postComment(
+      String id,
+      String author,
+      String commentContent,
+      ) async {
+    final response = await _apiClient.postReq(
+      '/comments/$id',
+      data: {
+
+        'author': author,
+        'content': commentContent
+        
+      },
+    );
+    return postCommentResponse.fromJson(response.data);
+
+
+}
 }

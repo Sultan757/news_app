@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class GetNewsResponse {
   List<Data> data;
   int status;
@@ -27,7 +29,7 @@ class Data {
   String title;
   String heading;
   String description;
-  List<Image> image;
+  List<Photo> image;
   List<Video> myvideo;
   String createdAt;
   int v;
@@ -49,7 +51,7 @@ class Data {
       title: json['title'],
       heading: json['heading'],
       description: json['description'],
-      image: List<Image>.from(json['image'].map((item) => Image.fromJson(item))),
+      image: List<Photo>.from(json['image'].map((item) => Photo.fromJson(item))),
       myvideo: List<Video>.from(json['video'].map((item) => Video.fromJson(item))),
       createdAt: json['createdAt'],
       v: json['__v'],
@@ -70,15 +72,15 @@ class Data {
   }
 }
 
-class Image {
+class Photo {
   String url;
   String id;
   String imageId;
 
-  Image({required this.url, required this.id, required this.imageId});
+  Photo({required this.url, required this.id, required this.imageId});
 
-  factory Image.fromJson(Map<String, dynamic> json) {
-    return Image(
+  factory Photo.fromJson(Map<String, dynamic> json) {
+    return Photo(
       url: json['url'],
       id: json['id'],
       imageId: json['_id'],

@@ -19,6 +19,7 @@ class LoginViewModel extends BaseViewModel {
 
   //login api
   Future<LoginResponse> login() async {
+
     final response = await apiService.login(
       emailController.text,
       passwordController.text,
@@ -33,7 +34,7 @@ class LoginViewModel extends BaseViewModel {
 
       //saving register object
       await SharedPreferencesHelper.saveObject<LoginData>(
-          'userPayload', response.data!);
+          'loginPayload', response.data!);
 
       //token
       await SharedPreferencesHelper.saveString('loginToken', response.token!);

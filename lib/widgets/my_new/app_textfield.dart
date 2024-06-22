@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:showcase_app/constant/app_colors.dart';
 import 'package:showcase_app/constant/font_styles_constant.dart';
 
-Widget appTextField({height,width,Icon? prefixIcon, String? hintText, validator, TextEditingController? controller}) {
+Widget appTextField({height,width,Icon? prefixIcon, String? hintText, validator, TextEditingController? controller,bool? obscureText}) {
   return Container(
       height: height,
       width: width,
@@ -12,6 +12,7 @@ Widget appTextField({height,width,Icon? prefixIcon, String? hintText, validator,
           border: Border.all(color: AppColors.primaryBlack)
       ),
       child: TextFormField(
+        obscureText: obscureText ?? false,
         validator: validator,
         controller: controller,
         decoration: InputDecoration(

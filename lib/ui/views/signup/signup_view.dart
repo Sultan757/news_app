@@ -21,7 +21,7 @@ class RegisterView extends StatelessWidget {
           return Scaffold(
             backgroundColor: AppColors.white,
             appBar: AppBar(
-              backgroundColor: AppColors.frenchSkyBlue,
+              backgroundColor: AppColors.black,
               iconTheme: const IconThemeData(color: AppColors.white),
             ),
             body: Padding(
@@ -53,6 +53,7 @@ class RegisterView extends StatelessWidget {
                         //   validateName(value);
                         // },
                         hintText: 'Enter your name',
+                        controller: viewModel.nameController,
                         prefixIcon: const Icon(
                           Icons.person,
                           color: AppColors.primaryBlack,
@@ -69,6 +70,7 @@ class RegisterView extends StatelessWidget {
                       ),
                       SizedBox(height: 10.flexibleHeight),
                       appTextField(
+                        obscureText: true,
                         controller: viewModel.passwordController,
                         hintText: 'Enter your password',
                         prefixIcon: const Icon(
@@ -81,7 +83,7 @@ class RegisterView extends StatelessWidget {
                       ),
                       viewModel.isLoading
                           ? const CircularProgressIndicator(
-                          color: AppColors.frenchSkyBlue)
+                          color: AppColors.black)
                           : appButton(
                           onPressed: () {
                             // if (viewModel.formKey.currentState!.validate()) {
@@ -94,7 +96,7 @@ class RegisterView extends StatelessWidget {
                           btnText: viewModel.isLoading
                               ? 'Loading...'
                               : 'Register',
-                          bgColor: AppColors.frenchSkyBlue,
+                          bgColor: AppColors.black,
                           txtColor: AppColors.white),
                       SizedBox(height: 10.flexibleHeight),
                       Text.rich(TextSpan(
