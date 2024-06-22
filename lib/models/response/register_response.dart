@@ -2,7 +2,7 @@ import 'package:showcase_app/preferences/user_preferences.dart';
 
 class RegisterResponse {
   int? status;
-  FinalUser? finalUser;
+  RegisterUser? finalUser;
   String? token;
   String? message;
 
@@ -11,7 +11,7 @@ class RegisterResponse {
   RegisterResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     finalUser = json['finalUser'] != null
-        ? new FinalUser.fromJson(json['finalUser'])
+        ? new RegisterUser.fromJson(json['finalUser'])
         : null;
     token = json['token'];
     message = json['message'];
@@ -29,7 +29,7 @@ class RegisterResponse {
   }
 }
 
-class FinalUser implements JsonSerializable{
+class RegisterUser implements JsonSerializable{
   String? email;
   String? verified;
   int? visitCount;
@@ -37,7 +37,7 @@ class FinalUser implements JsonSerializable{
   String? sId;
   int? iV;
 
-  FinalUser(
+  RegisterUser(
       {this.email,
         this.verified,
         this.visitCount,
@@ -45,7 +45,7 @@ class FinalUser implements JsonSerializable{
         this.sId,
         this.iV});
 
-  FinalUser.fromJson(Map<String, dynamic> json) {
+  RegisterUser.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     verified = json['verified'];
     visitCount = json['visitCount'];

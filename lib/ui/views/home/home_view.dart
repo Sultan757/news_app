@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:showcase_app/app/app.router.dart';
 import 'package:showcase_app/constant/app_colors.dart';
 import 'package:showcase_app/constant/font_styles_constant.dart';
+import 'package:showcase_app/preferences/user_preferences.dart';
 import 'package:showcase_app/services/local/navigation_services.dart';
+import 'package:showcase_app/utils/size_util.dart';
 import 'package:showcase_app/widgets/my_new/news_item.dart';
 
 import 'package:stacked/stacked.dart';
@@ -21,13 +23,24 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: AppColors.frenchSkyBlue,
+            backgroundColor: AppColors.black,
             iconTheme: const IconThemeData(color: AppColors.white),
 
             title: Text(
               'News App',
               style: FontStylesConstant.font18(color: AppColors.white),
             ),
+            actions: [
+              InkWell(
+                onTap: (){
+                  NavService.navigateAndClearStack(Routes.loginView);
+                //  SharedPreferencesHelper.clearAll();
+                },
+                child: Padding(padding: EdgeInsets.only(right: 20.flexibleWidth),
+                child:Icon(Icons.logout)
+                ),
+              )
+            ],
           ),
           body:
           // viewModel.isLoading == false
@@ -51,17 +64,19 @@ class HomeView extends StatelessWidget {
 
                             NavService.navigateTo(
                               Routes.newsDetailsView,
-                              // arguments: NewsDetailsViewArguments(
-                              //
-                              // ),
+                              arguments: NewsDetailsViewArguments(
+                                newsDetails: viewModel.myData?[index],
+                                blogId: viewModel.blogId[index]
+
+                              ),
                             );
 
 
                 },
                 child: newsListView(
                   img: viewModel.imgUrl[index],
-                  title: 'dummy news titlle',
-                  shortDesc: 'dummy description',
+                  title: viewModel.imgTitle[index],
+                  shortDesc: viewModel.description[index],
                   //uploadedTime: '20 horas atrás',
                 ),
               );

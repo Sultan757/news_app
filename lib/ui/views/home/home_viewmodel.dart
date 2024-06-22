@@ -13,10 +13,9 @@ class HomeViewModel extends BaseViewModel {
   List<Data>? myData = [];
   List<String> imgTitle = [];
   List<String> blogId = [];
+  List<List<String>> videoUrls = []; // List of lists to store video URLs for each article
 
-  //
   bool isLoading = false;
-
 
   //get news api
   Future<GetNewsResponse> getNews() async {
@@ -28,14 +27,18 @@ class HomeViewModel extends BaseViewModel {
         isLoading = false;
         response.data.forEach((element) {
           description.add(element.description);
-          imgUrl.add(element.image[0].url);
+          blogId.add(element.id);
+          imgUrl.add(element.image.isNotEmpty ? element.image[0].url : '');
           print('image====${imgUrl}');
-          //    blogId.add(element.sId!);
-
           imgTitle.add(element.title);
-
-
           imgObject = element.image;
+
+          // Extract video URLs
+          List<String> videos = [];
+          element.myvideo.forEach((videoElement) {
+            videos.add(videoElement.url);
+          });
+          videoUrls.add(videos);
         });
 
         notifyListeners();
@@ -47,40 +50,8 @@ class HomeViewModel extends BaseViewModel {
     return response;
   }
 
-  // //get article count
-  // int? articleCount;
-  // String? isVerified;
-  //
-  //
-  // FinalUser? retrieveUserDetails;
-  // LoginData? retrieveLoginUserDetails;
-  // String? registerToken;
-  // String? loginToken;
-  //
   onInit() async {
     getNews();
     isLoading = true;
-    // register object retrieve
-    // final LoginData? consumerPayload =
-    // await SharedPreferencesHelper.getObject<LoginData>(
-    //   'userPayload',
-    //       (data) => LoginData.fromJson(data),
-    // );
-    //
-    //   retrieveLoginUserDetails = consumerPayload;
-    //
-    //   final FinalUser? registerPayload =
-    //   await SharedPreferencesHelper.getObject<FinalUser>(
-    //     'registerPayload',
-    //         (data) => FinalUser.fromJson(data),
-    //   );
-    //   retrieveUserDetails = registerPayload;
-    //
-    //   String? login = await SharedPreferencesHelper.getString('loginToken');
-    //   loginToken = login;
-    //
-    //   String? register = await SharedPreferencesHelper.getString('registerToken');
-    //   registerToken = register;
-    // }
   }
 }

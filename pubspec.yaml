@@ -52,10 +52,10 @@ dependencies:
   flutter_screenutil:
   google_fonts: 6.1.0
   pinput:
-  firebase_core: ^2.27.0
-  firebase_auth: ^4.17.8
-  cloud_firestore:
+
   shared_preferences:
+  video_player:
+  chewie:
 
 dev_dependencies:
   flutter_test:

@@ -14,4 +14,5 @@ class AppImagePaths {
   static const String vectorGoogleIcon = 'assets/icons/google_icon.svg';
   static const String vectorAppleIcon = 'assets/icons/apple_icon.svg';
   static const String vectorProfileIcon = 'assets/icons/profile_icon.svg';
+  static const String splash = 'assets/images/splash.png';
 }

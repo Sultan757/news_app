@@ -12,10 +12,14 @@ class RegisterViewModel extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   ApiService apiService = locator<ApiService>();
   bool isLoading = false;
 
+
   Future<RegisterResponse> register() async {
+    await SharedPreferencesHelper.saveString(
+        'username', nameController.text);
     final response = await apiService.register(
       emailController.text,
       passwordController.text,
@@ -25,7 +29,7 @@ class RegisterViewModel extends BaseViewModel {
       isLoading = false;
 
       //saving register object
-      await SharedPreferencesHelper.saveObject<FinalUser>(
+      await SharedPreferencesHelper.saveObject<RegisterUser>(
           'registerPayload', response.finalUser!);
 
       //token
