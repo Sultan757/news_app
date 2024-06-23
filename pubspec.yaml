@@ -52,7 +52,6 @@ dependencies:
   flutter_screenutil:
   google_fonts: 6.1.0
   pinput:
-
   shared_preferences:
   video_player:
   chewie:

@@ -4,6 +4,7 @@ import 'package:showcase_app/ui/views/login/login_view.dart';
 import 'package:showcase_app/ui/views/news_details/news_details_view.dart';
 import 'package:showcase_app/ui/views/signup/signup_view.dart';
 import 'package:showcase_app/ui/views/splash/splash_view.dart';
+import 'package:showcase_app/ui/views/user_profile/profile_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -14,6 +15,7 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: NewsDetailsView),
+    MaterialRoute(page: ProfileView),
 
   ],
   dependencies: [

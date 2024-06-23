@@ -28,9 +28,9 @@ class LoginViewModel extends BaseViewModel {
     if (response.status == 200 || response.status == 201) {
       isLoading = false;
 
-      // // updating user token
-      // await SharedPreferencesHelper.saveString(
-      //     'token', '${response.token}');
+      // saving email
+      await SharedPreferencesHelper.saveString(
+          'email', '${response.data?.email}');
 
       //saving register object
       await SharedPreferencesHelper.saveObject<LoginData>(

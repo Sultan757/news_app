@@ -5,17 +5,18 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
 import 'package:flutter/material.dart';
-import 'package:showcase_app/models/response/get_news_response.dart' as _i8;
+import 'package:showcase_app/models/response/get_news_response.dart' as _i9;
 import 'package:showcase_app/ui/views/home/home_view.dart' as _i5;
 import 'package:showcase_app/ui/views/login/login_view.dart' as _i3;
 import 'package:showcase_app/ui/views/news_details/news_details_view.dart'
     as _i6;
 import 'package:showcase_app/ui/views/signup/signup_view.dart' as _i4;
 import 'package:showcase_app/ui/views/splash/splash_view.dart' as _i2;
+import 'package:showcase_app/ui/views/user_profile/profile_view.dart' as _i7;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i9;
+import 'package:stacked_services/stacked_services.dart' as _i10;
 
 class Routes {
   static const splashView = '/';
@@ -28,12 +29,15 @@ class Routes {
 
   static const newsDetailsView = '/news-details-view';
 
+  static const profileView = '/profile-view';
+
   static const all = <String>{
     splashView,
     loginView,
     registerView,
     homeView,
     newsDetailsView,
+    profileView,
   };
 }
 
@@ -59,29 +63,33 @@ class StackedRouter extends _i1.RouterBase {
       Routes.newsDetailsView,
       page: _i6.NewsDetailsView,
     ),
+    _i1.RouteDef(
+      Routes.profileView,
+      page: _i7.ProfileView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i7.MaterialPageRoute<dynamic>(
+      return _i8.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.LoginView: (data) {
-      return _i7.MaterialPageRoute<dynamic>(
+      return _i8.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.LoginView(),
         settings: data,
       );
     },
     _i4.RegisterView: (data) {
-      return _i7.MaterialPageRoute<dynamic>(
+      return _i8.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.RegisterView(),
         settings: data,
       );
     },
     _i5.HomeView: (data) {
-      return _i7.MaterialPageRoute<dynamic>(
+      return _i8.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.HomeView(),
         settings: data,
       );
@@ -90,12 +98,21 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<NewsDetailsViewArguments>(
         orElse: () => const NewsDetailsViewArguments(),
       );
-      return _i7.MaterialPageRoute<dynamic>(
+      return _i8.MaterialPageRoute<dynamic>(
         builder: (context) => _i6.NewsDetailsView(
             key: args.key,
             newsDetails: args.newsDetails,
             videoUrl: args.videoUrl,
             blogId: args.blogId),
+        settings: data,
+      );
+    },
+    _i7.ProfileView: (data) {
+      final args = data.getArgs<ProfileViewArguments>(
+        orElse: () => const ProfileViewArguments(),
+      );
+      return _i8.MaterialPageRoute<dynamic>(
+        builder: (context) => _i7.ProfileView(key: args.key),
         settings: data,
       );
     },
@@ -116,9 +133,9 @@ class NewsDetailsViewArguments {
     this.blogId,
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
-  final _i8.Data? newsDetails;
+  final _i9.Data? newsDetails;
 
   final List<String>? videoUrl;
 
@@ -147,7 +164,29 @@ class NewsDetailsViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i9.NavigationService {
+class ProfileViewArguments {
+  const ProfileViewArguments({this.key});
+
+  final _i8.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant ProfileViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i10.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -205,8 +244,8 @@ extension NavigatorStateExtension on _i9.NavigationService {
   }
 
   Future<dynamic> navigateToNewsDetailsView({
-    _i7.Key? key,
-    _i8.Data? newsDetails,
+    _i8.Key? key,
+    _i9.Data? newsDetails,
     List<String>? videoUrl,
     String? blogId,
     int? routerId,
@@ -221,6 +260,22 @@ extension NavigatorStateExtension on _i9.NavigationService {
             newsDetails: newsDetails,
             videoUrl: videoUrl,
             blogId: blogId),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToProfileView({
+    _i8.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.profileView,
+        arguments: ProfileViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -284,8 +339,8 @@ extension NavigatorStateExtension on _i9.NavigationService {
   }
 
   Future<dynamic> replaceWithNewsDetailsView({
-    _i7.Key? key,
-    _i8.Data? newsDetails,
+    _i8.Key? key,
+    _i9.Data? newsDetails,
     List<String>? videoUrl,
     String? blogId,
     int? routerId,
@@ -300,6 +355,22 @@ extension NavigatorStateExtension on _i9.NavigationService {
             newsDetails: newsDetails,
             videoUrl: videoUrl,
             blogId: blogId),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithProfileView({
+    _i8.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.profileView,
+        arguments: ProfileViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

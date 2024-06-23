@@ -41,6 +41,7 @@ class LoginView extends StatelessWidget {
                           'assets/images/login.png',
                           height: 220,
                           width: 220,
+
                         ),
                       ),
                       Text(

@@ -20,6 +20,8 @@ class RegisterViewModel extends BaseViewModel {
   Future<RegisterResponse> register() async {
     await SharedPreferencesHelper.saveString(
         'username', nameController.text);
+
+
     final response = await apiService.register(
       emailController.text,
       passwordController.text,
@@ -27,7 +29,9 @@ class RegisterViewModel extends BaseViewModel {
 
     if (response.status == 200 || response.status == 201) {
       isLoading = false;
-
+      // saving email
+      await SharedPreferencesHelper.saveString(
+          'email', '${response.finalUser?.email}');
       //saving register object
       await SharedPreferencesHelper.saveObject<RegisterUser>(
           'registerPayload', response.finalUser!);
