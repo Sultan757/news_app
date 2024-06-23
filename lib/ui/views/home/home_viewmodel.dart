@@ -29,7 +29,6 @@ class HomeViewModel extends BaseViewModel {
           description.add(element.description);
           blogId.add(element.id);
           imgUrl.add(element.image.isNotEmpty ? element.image[0].url : '');
-          print('image====${imgUrl}');
           imgTitle.add(element.title);
           imgObject = element.image;
 

@@ -31,15 +31,27 @@ class HomeView extends StatelessWidget {
               style: FontStylesConstant.font18(color: AppColors.white),
             ),
             actions: [
+              // InkWell(
+              //   onTap: (){
+              //     NavService.navigateAndClearStack(Routes.loginView);
+              //   //  SharedPreferencesHelper.clearAll();
+              //   },
+              //   child: Padding(padding: EdgeInsets.only(right: 20.flexibleWidth),
+              //   child: const Icon(Icons.logout)
+              //   ),
+              // )
               InkWell(
                 onTap: (){
-                  NavService.navigateAndClearStack(Routes.loginView);
-                //  SharedPreferencesHelper.clearAll();
+                  NavService.navigateTo(Routes.profileView);
                 },
-                child: Padding(padding: EdgeInsets.only(right: 20.flexibleWidth),
-                child:Icon(Icons.logout)
+                child: const Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 12.0, vertical: 11),
+                  child: CircleAvatar(
+                    radius: 16,
+                    backgroundImage: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s'),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
           body:
