@@ -1,17 +1,13 @@
-import 'package:showcase_app/preferences/user_preferences.dart';
-
-class LoginResponse {
+class UpdateProfileResponse {
   int? status;
   LoginData? data;
-  String? token;
   String? message;
 
-  LoginResponse({this.status, this.data, this.token, this.message});
+  UpdateProfileResponse({this.status, this.data, this.message});
 
-  LoginResponse.fromJson(Map<String, dynamic> json) {
+  UpdateProfileResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     data = json['data'] != null ? new LoginData.fromJson(json['data']) : null;
-    token = json['token'];
     message = json['message'];
   }
 
@@ -21,13 +17,12 @@ class LoginResponse {
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['token'] = this.token;
     data['message'] = this.message;
     return data;
   }
 }
 
-class LoginData  implements JsonSerializable{
+class LoginData {
   String? sId;
   String? email;
   String? verified;
@@ -36,7 +31,7 @@ class LoginData  implements JsonSerializable{
   int? iV;
   List<ProfilePicture>? profilePicture;
 
-  LoginData.LoginData(
+  LoginData(
       {this.sId,
         this.email,
         this.verified,

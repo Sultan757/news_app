@@ -54,7 +54,9 @@ dependencies:
   pinput:
   shared_preferences:
   video_player:
+  http_parser:
   chewie:
+  change_app_package_name:
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,4 @@
-package com.example.showcase_app
+package com.influto.app
 
 import io.flutter.embedding.android.FlutterActivity
 
