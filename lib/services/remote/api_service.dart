@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:showcase_app/models/response/get_comments.dart';
 import 'package:showcase_app/models/response/get_news_response.dart';
 import 'package:showcase_app/models/response/login_response.dart';
 import 'package:showcase_app/models/response/register_response.dart';
+import 'package:showcase_app/models/response/update_profile.dart';
+import 'package:showcase_app/preferences/user_preferences.dart';
 import '../../models/response/post_comment_response.dart';
 import 'api_client.dart';
 
@@ -78,7 +83,33 @@ class ApiService {
       },
     );
     return postCommentResponse.fromJson(response.data);
+  }
+
+  // Update profile image
+  Future<UpdateProfileResponse> updateProfileImage(File imageFile) async {
+    String fileName = imageFile.path.split('/').last;
+
+    String? token = await SharedPreferencesHelper.getString("token");
+    FormData formData = FormData.fromMap({
+      'image': await MultipartFile.fromFile(
+        imageFile.path,
+        filename: fileName,
+        contentType: new MediaType('image', 'jpeg'),
+      ),
+    });
 
 
-}
+    final response = await _apiClient.putReq(
+      '/auth/update-profile',
+      data: formData,
+      options: Options(
+        headers: {
+          'token': token, // Custom header field for the token
+          'Content-Type': 'multipart/form-data',
+        },
+      ),
+    );
+
+    return UpdateProfileResponse.fromJson(response.data);
+  }
 }

@@ -27,7 +27,10 @@ class LoginViewModel extends BaseViewModel {
 
     if (response.status == 200 || response.status == 201) {
       isLoading = false;
+      if(response.data?.profilePicture?.isNotEmpty == true){
+        await SharedPreferencesHelper.saveString('profile', response.data!.profilePicture![0].url!);
 
+      }
       // saving email
       await SharedPreferencesHelper.saveString(
           'email', '${response.data?.email}');
@@ -37,7 +40,7 @@ class LoginViewModel extends BaseViewModel {
           'loginPayload', response.data!);
 
       //token
-      await SharedPreferencesHelper.saveString('loginToken', response.token!);
+      await SharedPreferencesHelper.saveString('token', response.token!);
 
       NavService.navigateAndClearStack(Routes.homeView);
       NavService.showSnackBar('Success!', '${response.message}', const Duration(milliseconds: 2000));

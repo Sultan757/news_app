@@ -51,7 +51,7 @@ class NewsDetailsView extends StatelessWidget {
             backgroundColor: AppColors.black,
             iconTheme: const IconThemeData(color: AppColors.white),
             title: Text(
-              'News Details',
+              'Influto Details',
               style: FontStylesConstant.font18(color: AppColors.white),
             ),
           ),

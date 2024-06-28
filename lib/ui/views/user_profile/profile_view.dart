@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:showcase_app/app/app.router.dart';
 import 'package:showcase_app/constant/font_styles_constant.dart';
+import 'package:showcase_app/preferences/user_preferences.dart';
 import 'package:showcase_app/services/local/navigation_services.dart';
 import 'package:showcase_app/ui/views/user_profile/profile_viewmodel.dart';
 import 'package:showcase_app/utils/size_util.dart';
@@ -16,17 +17,9 @@ import '../../../constant/app_colors.dart';
 class ProfileView extends StatelessWidget {
   ProfileView({super.key});
 
-  final ImagePicker _picker = ImagePicker();
-  File? _image;
 
-  Future<void> _pickImage(BuildContext context) async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      _image = File(pickedFile.path);
-      (context as Element)
-          .markNeedsBuild(); // Trigger a rebuild to update the UI
-    }
-  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +67,12 @@ class ProfileView extends StatelessWidget {
                                       child: CircleAvatar(
                                         radius: 40
                                             .flexibleWidth, // Adjust radius accordingly
-                                        backgroundImage: _image != null
-                                            ? FileImage(_image!)
-                                            : const NetworkImage(
+                                        backgroundImage: viewModel.image != null
+                                            ?
+                                        FileImage(viewModel.image! ): viewModel.existingImage != null ?
+                                             NetworkImage(viewModel.existingImage!):
+
+                                        const NetworkImage(
                                                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s',
                                               ) as ImageProvider,
                                       ),
@@ -85,7 +81,7 @@ class ProfileView extends StatelessWidget {
                                       top: 2,
                                       right: -12,
                                       child: GestureDetector(
-                                        onTap: () => _pickImage(context),
+                                        onTap: () => viewModel.pickImage(),
                                         child: const CircleAvatar(
                                           radius: 15,
                                           backgroundColor: AppColors.black,
@@ -106,6 +102,7 @@ class ProfileView extends StatelessWidget {
                                 color: AppColors.white),
                           ),
                           SizedBox(height: 5.flexibleHeight),
+
                         ],
                       ),
                     ),
@@ -138,6 +135,7 @@ class ProfileView extends StatelessWidget {
                     ),
                     onPressed: () {
                       NavService.navigateAndClearStack(Routes.loginView);
+                      SharedPreferencesHelper.removeKey('profile');
                     },
                     child: Text(
                       'Logout',

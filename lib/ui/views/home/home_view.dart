@@ -27,7 +27,7 @@ class HomeView extends StatelessWidget {
             iconTheme: const IconThemeData(color: AppColors.white),
 
             title: Text(
-              'News App',
+              'Influto',
               style: FontStylesConstant.font18(color: AppColors.white),
             ),
             actions: [
@@ -44,11 +44,13 @@ class HomeView extends StatelessWidget {
                 onTap: (){
                   NavService.navigateTo(Routes.profileView);
                 },
-                child: const Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 12.0, vertical: 11),
+                child:  Padding(
+                  padding:  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 11),
                   child: CircleAvatar(
                     radius: 16,
-                    backgroundImage: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s'),
+                    backgroundImage: viewModel.existingImage != null ?
+                    NetworkImage(viewModel.existingImage!):
+                    const NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s'),
                   ),
                 ),
               ),
